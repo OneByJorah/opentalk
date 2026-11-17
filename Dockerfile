@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:26-alpine
 LABEL org.opencontainers.image.source="https://github.com/OneByJorah/opentalk" \
       org.opencontainers.image.description="Free, open, no-login chat with private rooms by code" \
       org.opencontainers.image.licenses="MIT"
