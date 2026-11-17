@@ -1,0 +1,112 @@
+:root {
+  --bg: #0a0a09;
+  --panel: #12120f;
+  --line: #24231d;
+  --text: #e8e6df;
+  --muted: #8a877c;
+  --amber: #FFB300;
+  --amber-dim: #FFB30022;
+  --err: #ff6b5a;
+  --font: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { background: var(--bg); color: var(--text); font: 14px/1.5 var(--font); }
+.hidden { display: none !important; }
+.amber { color: var(--amber); }
+
+button, input, textarea { font: inherit; color: inherit; }
+input, textarea {
+  width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: 6px;
+  padding: 10px 12px; outline: none;
+}
+input:focus, textarea:focus { border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-dim); }
+button {
+  cursor: pointer; background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+  padding: 10px 14px; font-weight: 600; transition: border-color .15s, background .15s;
+}
+button:hover { border-color: var(--amber); }
+button.primary { background: var(--amber); color: #0a0a09; border-color: var(--amber); }
+button.primary:hover { filter: brightness(1.08); }
+button.ghost { background: transparent; padding: 6px 10px; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Landing */
+#home { min-height: 100%; display: grid; place-items: center; padding: 24px; }
+.card {
+  width: 100%; max-width: 400px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 10px; padding: 28px; display: flex; flex-direction: column; gap: 12px;
+}
+h1 { margin: 0; font-size: 26px; letter-spacing: -.5px; }
+.sub { margin: 0 0 8px; color: var(--muted); }
+label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.row { display: flex; gap: 8px; }
+.row input { text-transform: uppercase; letter-spacing: 2px; }
+.divider { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 12px; margin: 6px 0; }
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.err { color: var(--err); min-height: 1.5em; margin: 0; }
+.fine { color: var(--muted); font-size: 11px; margin: 0; }
+
+/* Chat */
+#chat { height: 100%; display: flex; flex-direction: column; }
+header {
+  display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+  border-bottom: 1px solid var(--line); background: var(--panel);
+}
+.title { flex: 1; min-width: 0; }
+#roomName { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#roomName .code { color: var(--amber); letter-spacing: 2px; }
+.meta { color: var(--muted); font-size: 12px; }
+.body { flex: 1; display: flex; min-height: 0; }
+#messages { flex: 1; list-style: none; margin: 0; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+#messages li { word-wrap: break-word; overflow-wrap: anywhere; white-space: pre-wrap; }
+#messages .time { color: var(--muted); font-size: 11px; margin-right: 8px; }
+#messages .nick { color: var(--amber); font-weight: 700; margin-right: 8px; }
+#messages .me .nick { color: #7fd1ff; }
+#messages .sys { color: var(--muted); font-style: italic; font-size: 12px; }
+#userPanel { width: 200px; border-left: 1px solid var(--line); padding: 14px; overflow-y: auto; background: var(--panel); }
+#userPanel h3 { margin: 0 0 8px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+#userList { list-style: none; padding: 0; margin: 0; }
+#userList li { padding: 2px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#userList li::before { content: '● '; color: #4caf50; }
+.banner { padding: 8px 14px; background: var(--amber-dim); color: var(--amber); border-top: 1px solid var(--line); font-size: 12px; }
+#composer { display: flex; gap: 8px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--panel); }
+#composer textarea { resize: none; max-height: 140px; }
+
+@media (max-width: 640px) {
+  #userPanel { position: absolute; right: 0; top: 52px; bottom: 64px; z-index: 5; }
+}
+
+/* ---- v1.1 additions ---- */
+.online { margin: -4px 0 4px; color: var(--muted); font-size: 12px; display: flex; align-items: center; gap: 6px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; box-shadow: 0 0 8px #4caf50; animation: pulse 2s infinite; }
+@keyframes pulse { 50% { opacity: .4; } }
+.links { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+a { color: var(--amber); }
+.muted-link { color: var(--muted); font-size: 11px; text-decoration: none; }
+.muted-link:hover { color: var(--amber); }
+.donate {
+  font-size: 12px; font-weight: 700; text-decoration: none; color: var(--amber);
+  border: 1px solid var(--amber); border-radius: 6px; padding: 6px 10px; white-space: nowrap;
+}
+.donate:hover { background: var(--amber); color: #0a0a09; }
+.ghost-link { padding: 6px 10px; }
+.ad { width: 100%; max-width: 728px; margin: 16px auto 0; min-height: 90px; }
+#userPanel .ad { margin-top: 16px; min-height: 250px; }
+.sponsor {
+  display: block; padding: 6px 14px; font-size: 12px; text-align: center; text-decoration: none;
+  background: #16150f; color: var(--muted); border-bottom: 1px solid var(--line);
+}
+.sponsor::before { content: 'SPONSOR · '; color: var(--amber); font-weight: 700; letter-spacing: 1px; }
+a.sponsor:hover { color: var(--text); }
+.typing { min-height: 18px; padding: 0 14px; font-size: 11px; color: var(--muted); font-style: italic; }
+#messages .announce { background: var(--amber-dim); border-left: 3px solid var(--amber); padding: 6px 10px; border-radius: 4px; color: var(--amber); font-weight: 600; }
+#messages .admin .nick::after { content: ' ⚑'; color: var(--err); }
+#messages .action .nick, #messages .action .text { font-style: italic; color: var(--muted); }
+#messages .text a { word-break: break-all; }
+#userList .kickable { cursor: pointer; }
+#userList .kickable:hover { color: var(--err); text-decoration: line-through; }
+@media (max-width: 640px) {
+  .ghost-link.donate { display: none; }
+  #btnInvite { font-size: 12px; padding: 6px 8px; }
+}

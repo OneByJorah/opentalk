@@ -1,0 +1,30 @@
+services:
+  opentalk:
+    image: ghcr.io/onebyjorah/opentalk:latest   # or comment out and use `build: .`
+    build: .
+    container_name: opentalk
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      PORT: 8080
+    volumes:
+      - ./blocked-words.txt:/app/blocked-words.txt:ro
+    ports:
+      - "127.0.0.1:8080:8080"     # only reachable via your tunnel/proxy, never directly
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 256m
+    pids_limit: 100
+
+  # Publish through Cloudflare Tunnel — no inbound ports opened.
+  # Zero Trust → Networks → Tunnels → create tunnel → public hostname chat.example.com → http://opentalk:8080
+  # Then uncomment and put CF_TUNNEL_TOKEN=... in .env
+  # cloudflared:
+  #   image: cloudflare/cloudflared:latest
+  #   restart: unless-stopped
+  #   command: tunnel --no-autoupdate run
+  #   environment:
+  #     TUNNEL_TOKEN: ${CF_TUNNEL_TOKEN}
+  #   depends_on: [opentalk]

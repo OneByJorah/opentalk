@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Free, open chat. No sign-up, no login. Public lobby or private rooms by code.">
+  <meta name="theme-color" content="#0a0a09">
+  <meta property="og:title" content="__SITE_NAME__ — free open chat">
+  <meta property="og:description" content="No sign-up. Jump into the public lobby or open a private room and share the code.">
+  <title>__SITE_NAME__ — free open chat, no login</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- Landing -->
+  <main id="home" class="screen">
+    <div class="card">
+      <h1><span class="amber">&gt;_</span> <span id="siteName">OpenTalk</span></h1>
+      <p class="sub" id="tagline">Free &amp; open. No sign-up, no login. Messages aren't saved.</p>
+      <p class="online"><span class="dot"></span> <span id="onlineCount">–</span> in the lobby right now</p>
+
+      <label for="nick">Your nickname</label>
+      <input id="nick" maxlength="20" autocomplete="off" spellcheck="false" placeholder="e.g. trankilo">
+
+      <button id="btnLobby" class="primary">Join public lobby</button>
+
+      <div class="divider"><span>or go private</span></div>
+
+      <button id="btnCreate">Create private room</button>
+
+      <div class="row">
+        <input id="code" maxlength="9" autocomplete="off" spellcheck="false" placeholder="ROOM CODE">
+        <button id="btnJoin">Join</button>
+      </div>
+
+      <p id="homeErr" class="err" role="alert"></p>
+      <p class="fine">Be kind. Don't share personal info in the public lobby. Type <b>/help</b> in chat for commands.</p>
+      <div class="links">
+        <a id="donateHome" class="donate hidden" target="_blank" rel="noopener"></a>
+        <a id="githubLink" class="muted-link" target="_blank" rel="noopener">Open source on GitHub</a>
+      </div>
+    </div>
+    <div id="adHome" class="ad hidden"></div>
+  </main>
+
+  <!-- Chat -->
+  <section id="chat" class="screen hidden">
+    <header>
+      <button id="btnBack" class="ghost" title="Leave room" aria-label="Leave room">←</button>
+      <div class="title">
+        <div id="roomName">Public lobby</div>
+        <div id="roomMeta" class="meta"></div>
+      </div>
+      <a id="donateChat" class="ghost-link donate hidden" target="_blank" rel="noopener"></a>
+      <button id="btnLock" class="ghost hidden" title="Lock room">🔓</button>
+      <button id="btnInvite" class="ghost hidden" title="Copy invite link">Copy invite</button>
+      <button id="btnUsers" class="ghost" title="Who's here">👥 <span id="userCount">0</span></button>
+    </header>
+
+    <a id="sponsor" class="sponsor hidden" target="_blank" rel="noopener sponsored"></a>
+
+    <div class="body">
+      <ol id="messages" aria-live="polite"></ol>
+      <aside id="userPanel" class="hidden">
+        <h3>Online</h3>
+        <ul id="userList"></ul>
+        <p id="modHint" class="fine hidden">Click a name to remove them.</p>
+        <div id="adChat" class="ad hidden"></div>
+      </aside>
+    </div>
+
+    <div id="typing" class="typing"></div>
+    <div id="banner" class="banner hidden"></div>
+
+    <form id="composer" autocomplete="off">
+      <textarea id="text" rows="1" maxlength="500" placeholder="Type a message… (Enter to send · /help)"></textarea>
+      <button type="submit" class="primary">Send</button>
+    </form>
+  </section>
+
+  <script src="/app.js"></script>
+</body>
+</html>

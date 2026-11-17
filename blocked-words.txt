@@ -1,0 +1,4 @@
+# One word or phrase per line. Matches are replaced with ****.
+# Nicknames containing these words are rejected.
+# Lines starting with # are ignored. Matching is case-insensitive and whole-word.
+# Add your own list here, e.g. slurs and spam keywords in English, Spanish, Papiamentu…
